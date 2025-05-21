@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Movie from './Movie';
 
-export default function Movie(props) {
-    console.log(props);
+export default function Movies({ movies, onDelete }) {
     return (
-        <li className="list-group-item">
-            { props.item.title }
-            <button className="btn btn-sm btn-danger float-end" onClick={() => {props.deleteItem(props.item.id)}}>X</button>
-        </li>
-    )
+        <ul className="list-group">
+            {movies.map(movie => (
+                <Movie key={movie.id} movie={movie} onDelete={onDelete} />
+            ))}
+        </ul>
+    );
 }
