@@ -14,11 +14,11 @@ export default function MovieApplication() {
   };
 
   const sortByAlpha = () => {
-    setMovies(prev => [...prev].sort((a, b) => a.title.localeCompare(b.title)));
+    setMovies(previous => [...previous].sort((a, b) => a.title.localeCompare(b.title)));
   };
 
   const sortByGrade = () => {
-    setMovies(prev => [...prev].sort((a, b) => b.rating - a.rating));
+    setMovies(previous => [...previous].sort((a, b) => b.rating - a.rating));
   };
 
   return (
