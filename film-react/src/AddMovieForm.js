@@ -1,41 +1,60 @@
-import React, { useState, useRef } from 'react';
-import Movie from './Movies';
+import React, { useState } from 'react';
 
-export default function AddMovie() {
-    const [movieList, setMovieList] = useState([
-        { id: 1, title: "First Item" }
-    ]);
-    const inputRef = useRef();
+export default function AddMovie({ onAdd }) {
+    const [title, setTitle] = useState('');
+    const [rating, setRating] = useState('0');
 
-    function AddItem(event) {
-        if (event.keyCode === 13) {
-            const newId = movieList.length > 0 ? movieList[movieList.length - 1].id + 1 : 1;
-            setMovieList([
-                ...movieList,
-                { id: newId, title: inputRef.current.value }
-            ]);
-            inputRef.current.value = "";
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (title.trim() === '') {
+            alert("Du måste fylla i en titel!");
+            return;
         }
-    }
 
-    function DeleteItem(id) {
-        setMovieList(movieList.filter((item) => item.id !== id));
-    }
+        if (rating === '0') {
+            alert("Du måste välja ett betyg!");
+            return;
+        }
+
+        const newMovie = {
+            id: Date.now(),
+            title: title.trim(),
+            rating: parseInt(rating),
+        };
+
+        onAdd(newMovie);
+        setTitle('');
+        setRating('0');
+    };
 
     return (
-        <div>
-            <input
-                className="form-control"
-                ref={inputRef}
-                placeholder="Add new movie here..."
-                onKeyUp={AddItem}
-            />
-            <ul className="list-group">
-                {movieList.map((m) => (
-                    <Movie key={m.id} item={m} deleteItem={DeleteItem} />
-                ))}
-            </ul>
-            <strong>{movieList.length} </strong> {movieList.length === 1 ? "movie" : "movies"} left to do.
-        </div>
+        <form id="add-movie-form" onSubmit={handleSubmit} className="mb-3">
+            <div className="mb-2">
+                <input
+                    id="title-field"
+                    className="form-control"
+                    placeholder="Titel"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+            </div>
+            <div className="mb-2">
+                <select
+                    id="rating-field"
+                    className="form-select"
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                >
+                    <option value="0">Välj betyg</option>
+                    <option value="1">1 stjärna</option>
+                    <option value="2">2 stjärnor</option>
+                    <option value="3">3 stjärnor</option>
+                    <option value="4">4 stjärnor</option>
+                    <option value="5">5 stjärnor</option>
+                </select>
+            </div>
+            <button type="submit" className="btn btn-success">Lägg till film</button>
+        </form>
     );
 }

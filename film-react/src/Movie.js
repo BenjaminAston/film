@@ -1,16 +1,27 @@
 import React from 'react';
 
 export default function Movie({ movie, onDelete }) {
-    const renderStars = () => {
-        return '★'.repeat(movie.rating) + '☆'.repeat(5 - movie.rating);
-    };
+    const stars = Array.from({ length: movie.rating }, (_, i) => (
+        <img
+            key={i}
+            src="/images/star.png"
+            alt="Star"
+            style={{ width: '20px' }}
+        />
+    ));
 
     return (
-        <li className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-                <strong>{movie.title}</strong> — {renderStars()}
+        <li className="list-group-item fade-in d-flex justify-content-between align-items-center">
+            <div data-title={movie.title} data-grade={movie.rating}>
+                {movie.title}
+                {stars}
             </div>
-            <button className="btn btn-danger btn-sm" onClick={() => onDelete(movie.id)}>✖</button>
+            <img
+                src="/images/delete.png"
+                alt="Delete movie"
+                className="delete-movie-icon"
+                onClick={() => onDelete(movie.id)}
+            />
         </li>
     );
 }
