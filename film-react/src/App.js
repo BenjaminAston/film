@@ -3,22 +3,12 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Film</h1>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Filmlista</h1>
+      <AddMovieForm addMovie={addMovie} />
+      <Movies movies={movies} deleteMovie={deleteMovie} />
+      <button onClick={sortByTitle} className="btn btn-primary m-1">Alfabetisk ordning</button>
+      <button onClick={sortByRating} className="btn btn-primary m-1">Betygsordning</button>
     </div>
   );
 }
