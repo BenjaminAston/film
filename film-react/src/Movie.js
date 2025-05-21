@@ -12,10 +12,11 @@ export default function Movie({ movie, onDelete }) {
 
     return (
         <li className="list-group-item fade-in d-flex justify-content-between align-items-center">
-            <div data-title={movie.title} data-grade={movie.rating}>
-                {movie.title}
-                {stars}
-            </div>
+            <div data-title={movie.title} data-grade={movie.rating} style={{ display: 'flex', flexDirection: 'column' }}>
+    <span>{movie.title}</span>
+    <div style={{ display: 'flex', gap: '4px' }}>{stars}</div>
+</div>
+
             <img
                 src="/delete.png"
                 alt="Delete movie"
