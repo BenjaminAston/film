@@ -4,7 +4,7 @@ export default function Movie({ movie, onDelete }) {
     const stars = Array.from({ length: movie.rating }, (_, i) => (
         <img
             key={i}
-            src="/images/star.png"
+            src="/star.png"
             alt="Star"
             style={{ width: '20px' }}
         />
@@ -17,7 +17,7 @@ export default function Movie({ movie, onDelete }) {
                 {stars}
             </div>
             <img
-                src="/images/delete.png"
+                src="/delete.png"
                 alt="Delete movie"
                 className="delete-movie-icon"
                 onClick={() => onDelete(movie.id)}
