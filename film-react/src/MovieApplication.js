@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AddMovie from './AddMovieForm';
-import Movies from './Movies';
+import Movies from './movies';
 
 export default function MovieApplication() {
   const [movies, setMovies] = useState([]);
